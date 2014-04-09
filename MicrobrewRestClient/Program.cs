@@ -20,7 +20,9 @@ namespace MicrobrewRestClient
         {
             Console.WriteLine("Logging in");
             Login("johnfredrik", "test");
-
+            Console.WriteLine("Adding BeerStyle");
+            AddBeerStyle();
+            Console.WriteLine("BeerStyles Added");
             Console.WriteLine("Adding Origins");
             AddOrigins();
             Console.WriteLine("Origins Added");
@@ -172,6 +174,22 @@ namespace MicrobrewRestClient
                 string jsonString = file.ReadToEnd();
                 //  Console.WriteLine(jsonString);
                 var request = new RestRequest("beers/", Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Authorization-Token", _userToken);
+                request.AddParameter("text/json", jsonString, ParameterType.RequestBody);
+                request.RequestFormat = DataFormat.Json;
+
+                var response = restClient.Execute(request);
+                Console.WriteLine(response.StatusCode);
+            }
+        }
+        private static void AddBeerStyle()
+        {
+            using (var file = new StreamReader(JSONPATH + "beerstyle.json"))
+            {
+                string jsonString = file.ReadToEnd();
+                //  Console.WriteLine(jsonString);
+                var request = new RestRequest("beerstyles/", Method.POST);
                 request.AddHeader("Content-Type", "application/json");
                 request.AddHeader("Authorization-Token", _userToken);
                 request.AddParameter("text/json", jsonString, ParameterType.RequestBody);
