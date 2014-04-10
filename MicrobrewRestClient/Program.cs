@@ -13,15 +13,13 @@ namespace MicrobrewRestClient
     public class Program
     {
         private static readonly IRestClient restClient = new RestClient("http://localhost:54663");
-<<<<<<< HEAD
-        private const string JSONPATH = @"json\";
-=======
+
         private const string JSONPATH = @"..\..\JSON\";
->>>>>>> 44e6bad7b9f086ebbc5ff309d94aed2dea422d57
         private static string _userToken; 
 
         public static void Main(string[] args)
         {
+            HopFrom();
             Console.WriteLine("Logging in");
             Login("johnfredrik", "test");
             Console.WriteLine("Adding BeerStyle");
@@ -202,6 +200,15 @@ namespace MicrobrewRestClient
                 var response = restClient.Execute(request);
                 Console.WriteLine(response.StatusCode);
             }
+        }
+
+        private static void HopFrom()
+        {
+            var request = new RestRequest("hops/hopforms",Method.GET);
+            request.AddHeader("Content-Type", "application/json");
+            request.RequestFormat = DataFormat.Json;
+            var queryResult = restClient.Execute(request);
+            Console.WriteLine(queryResult.Content.ToString());
         }
     }
 }
