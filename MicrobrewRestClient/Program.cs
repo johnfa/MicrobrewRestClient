@@ -13,7 +13,7 @@ namespace MicrobrewRestClient
     public class Program
     {
         private static readonly IRestClient restClient = new RestClient("http://localhost:54663");
-        private const string JSONPATH = @"C:\Users\jfa\Documents\JSON\";
+        private const string JSONPATH = @"..\..\JSON\";
         private static string _userToken; 
 
         public static void Main(string[] args)
