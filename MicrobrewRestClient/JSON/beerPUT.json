@@ -138,7 +138,15 @@
               }
             ],
             "Fermentables": [],
-            "Others": [],
+            "Others": [
+              {
+                "OtherId": 1,
+                "StepId": 0,
+                "Name": "Strawberry",
+                "Type": "Fruit",
+                "Amount": 12
+              }
+            ],
             "Notes": null
           },
           {
