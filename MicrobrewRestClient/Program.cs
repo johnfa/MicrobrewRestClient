@@ -25,6 +25,12 @@ namespace MicrobrewRestClient
             Console.WriteLine("Adding BeerStyle");
             AddBeerStyle();
             Console.WriteLine("BeerStyles Added");
+            Console.WriteLine("Adding User");
+            AddUser();
+            Console.WriteLine("User Added");
+            Console.WriteLine("Adding Brewery");
+            AddBrewery();
+            Console.WriteLine("Brewery Added");
             Console.WriteLine("Adding Origins");
             AddOrigins();
             Console.WriteLine("Origins Added");
@@ -43,10 +49,10 @@ namespace MicrobrewRestClient
             Console.WriteLine("Adding Others");
             AddOthers();
             Console.WriteLine("Others Added");
-            
-                Console.WriteLine("Adding Beer");
-                AddBeer();
-                Console.WriteLine("Beer Added");
+
+            Console.WriteLine("Adding Beer");
+            AddBeer();
+            Console.WriteLine("Beer Added");
            
             Console.WriteLine("-----------------");
                 
@@ -66,6 +72,40 @@ namespace MicrobrewRestClient
            
 
         }
+        private static void AddUser()
+        {
+            using (var file = new StreamReader(JSONPATH + "user.json"))
+            {
+                string jsonString = file.ReadToEnd();
+                //  Console.WriteLine(jsonString);
+                var request = new RestRequest("users/", Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Authorization-Token", _userToken);
+                request.AddParameter("text/json", jsonString, ParameterType.RequestBody);
+                request.RequestFormat = DataFormat.Json;
+
+                var response = restClient.Execute(request);
+                Console.WriteLine(response.StatusCode);
+            }
+        }
+
+        private static void AddBrewery()
+        {
+            using (var file = new StreamReader(JSONPATH + "brewery.json"))
+            {
+                string jsonString = file.ReadToEnd();
+                //  Console.WriteLine(jsonString);
+                var request = new RestRequest("breweries/", Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Authorization-Token", _userToken);
+                request.AddParameter("text/json", jsonString, ParameterType.RequestBody);
+                request.RequestFormat = DataFormat.Json;
+
+                var response = restClient.Execute(request);
+                Console.WriteLine(response.StatusCode);
+            }
+        }
+
 
         private static void AddHops()
         {
